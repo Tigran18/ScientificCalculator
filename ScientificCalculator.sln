@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScientificCalculator", "ScientificCalculator\ScientificCalculator.vcxproj", "{E81F8D00-4AE4-4967-913E-4822EFB15317}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ScientificCalculatorSetup", "ScientificCalculatorSetup\ScientificCalculatorSetup.vdproj", "{97246A7A-F7E0-4156-BA8B-186F2809177D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Debug|x64.ActiveCfg = Debug|x64
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Debug|x64.Build.0 = Debug|x64
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Debug|x86.ActiveCfg = Debug|Win32
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Debug|x86.Build.0 = Debug|Win32
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Release|x64.ActiveCfg = Release|x64
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Release|x64.Build.0 = Release|x64
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Release|x86.ActiveCfg = Release|Win32
+		{E81F8D00-4AE4-4967-913E-4822EFB15317}.Release|x86.Build.0 = Release|Win32
+		{97246A7A-F7E0-4156-BA8B-186F2809177D}.Debug|x64.ActiveCfg = Debug
+		{97246A7A-F7E0-4156-BA8B-186F2809177D}.Debug|x86.ActiveCfg = Debug
+		{97246A7A-F7E0-4156-BA8B-186F2809177D}.Release|x64.ActiveCfg = Release
+		{97246A7A-F7E0-4156-BA8B-186F2809177D}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1C3F5AA-D01C-41A1-9C1A-6BA2A472B2B3}
+	EndGlobalSection
+EndGlobal
