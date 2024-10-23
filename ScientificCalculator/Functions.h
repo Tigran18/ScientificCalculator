@@ -17,6 +17,7 @@ double calculateSimpleExpression(double num1, double num2, char op) {
         else {
             return 0;
         }
+
     default:
         return 0;
     }
