@@ -691,6 +691,7 @@ namespace ScientificCalculator {
 		static int num_of_brackets = 0;
 		bool brackets = false;
 	private:
+
 		System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
 		System::Void button0_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);

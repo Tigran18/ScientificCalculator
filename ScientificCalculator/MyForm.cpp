@@ -1,9 +1,5 @@
 ﻿#include "MyForm.h"
 #include "Functions.h"
-#include <math.h>
-#include <stack>
-#include <string>
-#include <msclr/marshal_cppstd.h>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -139,40 +135,46 @@ inline void ScientificCalculator::MyForm::btn_plus_Click(System::Object^ sender,
 }
 
 inline void ScientificCalculator::MyForm::btn_minus_Click(System::Object^ sender, System::EventArgs^ e) {
-    if (!this->equal_button_clicked) {
-        btn_equal_Click(sender, e);
-        math_action('-');
+    if (!this->brackets) {
+        if (!this->equal_button_clicked) {
+            btn_equal_Click(sender, e);
+            math_action('-');
+        }
+        else {
+            math_action('-');
+        }
     }
     else {
-        math_action('-');
-    }
-    if (this->brackets) {
         this->NewOutputLabel->Text += "-";
     }
 }
 
 inline void ScientificCalculator::MyForm::btn_mul_Click(System::Object^ sender, System::EventArgs^ e) {
-    if (!this->equal_button_clicked) {
-        btn_equal_Click(sender, e);
-        math_action('*');
+    if (!this->brackets) {
+        if (!this->equal_button_clicked) {
+            btn_equal_Click(sender, e);
+            math_action('*');
+        }
+        else {
+            math_action('*');
+        }
     }
     else {
-        math_action('*');
-    }
-    if (this->brackets) {
         this->NewOutputLabel->Text += "*";
     }
 }
 
 inline void ScientificCalculator::MyForm::btn_divide_Click(System::Object^ sender, System::EventArgs^ e) {
-    if (!this->equal_button_clicked) {
-        btn_equal_Click(sender, e);
-        math_action('/');
+    if (!this->brackets) {
+        if (!this->equal_button_clicked) {
+            btn_equal_Click(sender, e);
+            math_action('/');
+        }
+        else {
+            math_action('/');
+        }
     }
     else {
-        math_action('/');
-    }
-    if (this->brackets) {
         this->NewOutputLabel->Text += "/";
     }
 }
@@ -210,28 +212,41 @@ inline System::Void ScientificCalculator::MyForm::btn_brack2_Click(System::Objec
 
 inline void ScientificCalculator::MyForm::btn_equal_Click(System::Object^ sender, System::EventArgs^ e) {
     if (this->brackets) {
-
-        std::string expression = msclr::interop::marshal_as<std::string>(this->NewOutputLabel->Text);
-
-        if (expression.find('(') != std::string::npos && expression.find(')') != std::string::npos) {
-            double result = calculateInsideBrackets(expression);
-            this->NewOutputLabel->Text = result.ToString();
+        if(this->num_of_brackets!=0){
+            return;
         }
+        int length = this->NewOutputLabel->Text->Length;
+        char* text = new char[length + 1];
+        char* result = new char[length + 1];
+        int i = 0;
+        for each (char c in this->NewOutputLabel->Text) {
+            text[i++] = c;
+        }
+        text[length] = '\0'; 
 
-
-        bool allAlnum = true;
         this->OldOutputLabel->Text = this->NewOutputLabel->Text;
-        for each (wchar_t c in this->NewOutputLabel->Text) {
-            if (!isalnum(c)) {
-                allAlnum = false;
-                break;
-            }
+        this->NewOutputLabel->Text = " ";
+
+        CalculateTheBrackets(text, length, result);
+
+        double result_num = 0.0;
+        i = 0;
+        bool decimal_found = false; // Флаг для определения наличия десятичной точки
+        double decimal_place = 1.0;
+
+        String^ resultString = "";
+        while (result[i] != '\0') {
+            resultString += gcnew String(&result[i], 0, 1); // Конвертируем каждый символ в строку
+            i++;
         }
-        if (allAlnum) {
-            this->brackets = false;
-        }
+        this->NewOutputLabel->Text = resultString; // Устанавливаем текст после цикла
+
+        this->brackets = false;
+        delete[] text;
+        delete[] result; 
         return;
     }
+
     if (this->user_action != ' ') {
         this->second_num = Convert::ToDouble(this->NewOutputLabel->Text);
         switch (this->user_action) {
