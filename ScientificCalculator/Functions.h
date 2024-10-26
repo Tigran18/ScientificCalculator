@@ -9,3 +9,4 @@ void CalculateTheBrackets(char* expression, int length, char* result);
 
 double EvaluateExpression(char* expression, int length);
 
+double Log(double base, double num);;

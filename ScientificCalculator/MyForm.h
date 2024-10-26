@@ -81,6 +81,14 @@ namespace ScientificCalculator {
 	private: System::Windows::Forms::Button^ btn_pi;
 
 	private: System::Windows::Forms::Label^ OldOutputLabel;
+	private: System::Windows::Forms::Button^ btn_sin;
+	private: System::Windows::Forms::Button^ btn_cos;
+	private: System::Windows::Forms::Button^ btn_tg;
+	private: System::Windows::Forms::Button^ btn_ctg;
+
+
+
+
 
 
 
@@ -141,6 +149,10 @@ namespace ScientificCalculator {
 			this->btn_e = (gcnew System::Windows::Forms::Button());
 			this->btn_pi = (gcnew System::Windows::Forms::Button());
 			this->OldOutputLabel = (gcnew System::Windows::Forms::Label());
+			this->btn_sin = (gcnew System::Windows::Forms::Button());
+			this->btn_cos = (gcnew System::Windows::Forms::Button());
+			this->btn_tg = (gcnew System::Windows::Forms::Button());
+			this->btn_ctg = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// NewOutputLabel
@@ -433,7 +445,7 @@ namespace ScientificCalculator {
 			// btn_log
 			// 
 			this->btn_log->BackColor = System::Drawing::SystemColors::GrayText;
-			this->btn_log->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btn_log->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btn_log->Location = System::Drawing::Point(7, 557);
 			this->btn_log->Name = L"btn_log";
@@ -459,13 +471,13 @@ namespace ScientificCalculator {
 			// btn_xy
 			// 
 			this->btn_xy->BackColor = System::Drawing::SystemColors::GrayText;
-			this->btn_xy->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btn_xy->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btn_xy->Location = System::Drawing::Point(7, 465);
 			this->btn_xy->Name = L"btn_xy";
 			this->btn_xy->Size = System::Drawing::Size(72, 40);
 			this->btn_xy->TabIndex = 26;
-			this->btn_xy->Text = L"x^y";
+			this->btn_xy->Text = L"X^(y)";
 			this->btn_xy->UseVisualStyleBackColor = false;
 			this->btn_xy->Click += gcnew System::EventHandler(this, &MyForm::btn_xy_Click);
 			// 
@@ -493,6 +505,7 @@ namespace ScientificCalculator {
 			this->btn_2nd->TabIndex = 11;
 			this->btn_2nd->Text = L"2nd";
 			this->btn_2nd->UseVisualStyleBackColor = false;
+			this->btn_2nd->Click += gcnew System::EventHandler(this, &MyForm::btn_2nd_Click);
 			// 
 			// btn_xsquare
 			// 
@@ -529,7 +542,7 @@ namespace ScientificCalculator {
 			this->btn_del->Name = L"btn_del";
 			this->btn_del->Size = System::Drawing::Size(72, 40);
 			this->btn_del->TabIndex = 15;
-			this->btn_del->Text = L"<-";
+			this->btn_del->Text = L"«";
 			this->btn_del->UseVisualStyleBackColor = false;
 			this->btn_del->Click += gcnew System::EventHandler(this, &MyForm::btn_del_Click);
 			// 
@@ -624,6 +637,54 @@ namespace ScientificCalculator {
 			this->OldOutputLabel->TabIndex = 36;
 			this->OldOutputLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
+			// btn_sin
+			// 
+			this->btn_sin->BackColor = System::Drawing::SystemColors::GrayText;
+			this->btn_sin->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_sin->Location = System::Drawing::Point(7, 260);
+			this->btn_sin->Name = L"btn_sin";
+			this->btn_sin->Size = System::Drawing::Size(95, 40);
+			this->btn_sin->TabIndex = 37;
+			this->btn_sin->Text = L"sin";
+			this->btn_sin->UseVisualStyleBackColor = false;
+			// 
+			// btn_cos
+			// 
+			this->btn_cos->BackColor = System::Drawing::SystemColors::GrayText;
+			this->btn_cos->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_cos->Location = System::Drawing::Point(103, 260);
+			this->btn_cos->Name = L"btn_cos";
+			this->btn_cos->Size = System::Drawing::Size(95, 40);
+			this->btn_cos->TabIndex = 38;
+			this->btn_cos->Text = L"cos";
+			this->btn_cos->UseVisualStyleBackColor = false;
+			// 
+			// btn_tg
+			// 
+			this->btn_tg->BackColor = System::Drawing::SystemColors::GrayText;
+			this->btn_tg->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_tg->Location = System::Drawing::Point(200, 260);
+			this->btn_tg->Name = L"btn_tg";
+			this->btn_tg->Size = System::Drawing::Size(95, 40);
+			this->btn_tg->TabIndex = 39;
+			this->btn_tg->Text = L"tg";
+			this->btn_tg->UseVisualStyleBackColor = false;
+			// 
+			// btn_ctg
+			// 
+			this->btn_ctg->BackColor = System::Drawing::SystemColors::GrayText;
+			this->btn_ctg->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_ctg->Location = System::Drawing::Point(296, 260);
+			this->btn_ctg->Name = L"btn_ctg";
+			this->btn_ctg->Size = System::Drawing::Size(95, 40);
+			this->btn_ctg->TabIndex = 40;
+			this->btn_ctg->Text = L"ctg";
+			this->btn_ctg->UseVisualStyleBackColor = false;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -631,6 +692,10 @@ namespace ScientificCalculator {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(398, 649);
+			this->Controls->Add(this->btn_ctg);
+			this->Controls->Add(this->btn_tg);
+			this->Controls->Add(this->btn_cos);
+			this->Controls->Add(this->btn_sin);
 			this->Controls->Add(this->OldOutputLabel);
 			this->Controls->Add(this->btn_2nd);
 			this->Controls->Add(this->btn_xsquare);
@@ -690,6 +755,7 @@ namespace ScientificCalculator {
 		bool equal_button_clicked = false;
 		static int num_of_brackets = 0;
 		bool brackets = false;
+		bool second_mode = false;
 	private:
 
 		System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
@@ -733,5 +799,6 @@ namespace ScientificCalculator {
 		System::Void btn_e_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btn_brack1_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btn_brack2_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void btn_2nd_Click(System::Object^ sender, System::EventArgs^ e);
 	};
 }

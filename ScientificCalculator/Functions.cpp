@@ -16,7 +16,7 @@ double factorial(double n) {
     return 1;
 }
 
-double applyOp(char op, double a, double b) {
+static double applyOp(char op, double a, double b) {
     switch (op) {
     case '+': return a + b;
     case '-': return a - b;
@@ -26,15 +26,15 @@ double applyOp(char op, double a, double b) {
     return 0;
 }
 
-int precedence(char op) {
+static int precedence(char op) {
     if (op == '+' || op == '-') return 1;
     if (op == '*' || op == '/') return 2;
     return 0;
 }
 
 double EvaluateExpression(char* expr, int length) {
-    double values[100];
-    char ops[100];
+    double values[100] = {0};
+    char ops[100] = {'0'};
     int valIndex = 0, opsIndex = 0;
 
     int i = 0;
@@ -94,6 +94,10 @@ double EvaluateExpression(char* expr, int length) {
     }
 
     return values[0];
+}
+
+double Log(double base, double num) {
+    return log(num) /log(base);
 }
 
 void CalculateTheBrackets(char* text, int length, char* result) {

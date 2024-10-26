@@ -230,16 +230,16 @@ inline void ScientificCalculator::MyForm::btn_equal_Click(System::Object^ sender
         CalculateTheBrackets(text, length, result);
 
         double result_num = 0.0;
-        i = 0;
-        bool decimal_found = false; // Флаг для определения наличия десятичной точки
+        bool decimal_found = false; 
         double decimal_place = 1.0;
 
         String^ resultString = "";
+        i = 0;
         while (result[i] != '\0') {
-            resultString += gcnew String(&result[i], 0, 1); // Конвертируем каждый символ в строку
+            resultString += gcnew String(&result[i], 0, 1); 
             i++;
         }
-        this->NewOutputLabel->Text = resultString; // Устанавливаем текст после цикла
+        this->NewOutputLabel->Text = resultString; 
 
         this->brackets = false;
         delete[] text;
@@ -270,7 +270,15 @@ inline void ScientificCalculator::MyForm::btn_equal_Click(System::Object^ sender
             this->result = fmod(first_num, second_num);
             break;
         case '^':
-            this->result = pow(first_num, second_num);
+            if (!this->second_mode) {
+                this->result = pow(first_num, second_num);
+            }
+            else {
+                this->result = pow(first_num, 1/second_num);
+            }
+            break;
+        case 'l':
+            this->result = Log(first_num, second_num);
             break;
         default:
             return;
@@ -340,7 +348,6 @@ inline void ScientificCalculator::MyForm::btn_equal_Click(System::Object^ sender
         return;
     }
 }
-
 
 inline void ScientificCalculator::MyForm::btn_del_Click(System::Object^ sender, System::EventArgs^ e) {
     String^ currentText = this->NewOutputLabel->Text;
@@ -414,21 +421,36 @@ inline System::Void ScientificCalculator::MyForm::btn_xabs_Click(System::Object^
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_ln_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = log(Convert::ToDouble(this->NewOutputLabel->Text));
+    if (!this->second_mode) {
+        this->result = log(Convert::ToDouble(this->NewOutputLabel->Text));
+    }
+    else{
+        this->result = pow(2.718281828459045, Convert::ToDouble(this->NewOutputLabel->Text));
+    }
     this->NewOutputLabel->Text = this->result.ToString();
     btn_equal->Focus();
     this->scientific_mode = true;
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_log_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = log10(Convert::ToDouble(this->NewOutputLabel->Text));
-    this->NewOutputLabel->Text = this->result.ToString();
-    btn_equal->Focus();
     this->scientific_mode = true;
+    if (!this->second_mode) {
+        this->result = log10(Convert::ToDouble(this->NewOutputLabel->Text));
+        this->NewOutputLabel->Text = this->result.ToString();
+    }
+    else {
+        math_action('l');
+    }
+    btn_equal->Focus();
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_10x_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = pow(10, Convert::ToDouble(this->NewOutputLabel->Text));
+    if (!this->second_mode) {
+        this->result = pow(10, Convert::ToDouble(this->NewOutputLabel->Text));
+    }
+    else {
+        this->result = pow(2, Convert::ToDouble(this->NewOutputLabel->Text));
+    }
     this->NewOutputLabel->Text = this->result.ToString();
     btn_equal->Focus();
     this->scientific_mode = true;
@@ -440,14 +462,24 @@ inline System::Void ScientificCalculator::MyForm::btn_xy_Click(System::Object^ s
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_sqrt_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = sqrt(Convert::ToDouble(this->NewOutputLabel->Text));
+    if (!this->second_mode) {
+        this->result = sqrt(Convert::ToDouble(this->NewOutputLabel->Text));
+    }
+    else {
+        this->result = cbrt(Convert::ToDouble(this->NewOutputLabel->Text));
+    }
     this->NewOutputLabel->Text = this->result.ToString();
     btn_equal->Focus();
     this->scientific_mode = true;
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_xsquare_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = pow(Convert::ToDouble(this->NewOutputLabel->Text), 2);
+    if (!this->second_mode) {
+        this->result = pow(Convert::ToDouble(this->NewOutputLabel->Text), 2);
+    }
+    else {
+        this->result = pow(Convert::ToDouble(this->NewOutputLabel->Text), 3);
+    }
     this->NewOutputLabel->Text = this->result.ToString();
     btn_equal->Focus();
     this->scientific_mode = true;
@@ -536,5 +568,28 @@ inline void ScientificCalculator::MyForm::MyForm_KeyPress(System::Object^ sender
         break;
     default:
         break;
+    }
+}
+
+inline System::Void ScientificCalculator::MyForm::btn_2nd_Click(System::Object^ sender, System::EventArgs^ e) {
+    if (this->second_mode==true) {
+        this->btn_2nd->BackColor = System::Drawing::Color::Gray;        
+        this->second_mode = false;
+        this->btn_ln->Text = "ln";
+        this->btn_log->Text = "log";
+        this->btn_10x->Text = "10^x";
+        this->btn_xy->Text = "X^(y)";
+        this->btn_sqrt->Text = "sqrtx";
+        this->btn_xsquare->Text = "x²";
+    }
+    else {
+        this->btn_2nd->BackColor = System::Drawing::Color::LightSkyBlue;        
+        this->second_mode = true;
+        this->btn_ln->Text = "e^x";
+        this->btn_log->Text = "logy(x)";
+        this->btn_10x->Text = "2^x";
+        this->btn_xy->Text = "x^(1/y)";
+        this->btn_sqrt->Text = "cbrtx";
+        this->btn_xsquare->Text = "x³";
     }
 }
