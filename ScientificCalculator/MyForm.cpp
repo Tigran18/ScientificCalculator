@@ -182,7 +182,7 @@ inline void ScientificCalculator::MyForm::btn_divide_Click(System::Object^ sende
 inline void ScientificCalculator::MyForm::math_action(char action) {
     this->first_num = Convert::ToDouble(this->NewOutputLabel->Text);
     this->user_action = action;
-    this->OldOutputLabel->Text = this->NewOutputLabel->Text;
+    this->OldOutputLabel->Text = this->NewOutputLabel->Text+ gcnew String(&action, 0, 1);;
     this->NewOutputLabel->Text = "0";
     this->operationPerformed = false;
     this->equal_button_clicked = false;
@@ -283,7 +283,8 @@ inline void ScientificCalculator::MyForm::btn_equal_Click(System::Object^ sender
         default:
             return;
         }
-        this->OldOutputLabel->Text = second_num.ToString();
+        char equal = '=';
+        this->OldOutputLabel->Text+= second_num.ToString()+ gcnew String(&equal, 0, 1);;
         this->NewOutputLabel->Text = this->result.ToString();
         this->operationPerformed = true;
         this->user_action_new = this->user_action;
@@ -371,9 +372,8 @@ inline void ScientificCalculator::MyForm::btn_Clear_Click(System::Object^ sender
 }
 
 inline System::Void ScientificCalculator::MyForm::btn_exp_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->result = Convert::ToDouble(this->NewOutputLabel->Text);
-
-    this->NewOutputLabel->Text = this->result.ToString();
+    double value = Convert::ToDouble(this->NewOutputLabel->Text);
+    this->NewOutputLabel->Text = value.ToString("E");
     btn_equal->Focus();
     this->scientific_mode = true;
 }
@@ -485,6 +485,54 @@ inline System::Void ScientificCalculator::MyForm::btn_xsquare_Click(System::Obje
     this->scientific_mode = true;
 }
 
+inline System::Void ScientificCalculator::MyForm::btn_sin_Click(System::Object^ sender, System::EventArgs^ e) {
+    if (!this->second_mode) {
+        this->result = sin(Convert::ToDouble(this->NewOutputLabel->Text) * 3.141592653589793 / 180.00);
+    }
+    else {
+        this->result = asin(Convert::ToDouble(this->NewOutputLabel->Text))*180.0 / 3.141592653589793;
+    }
+    this->NewOutputLabel->Text = this->result.ToString();
+    btn_equal->Focus();
+    this->scientific_mode = true;
+}
+
+inline System::Void ScientificCalculator::MyForm::btn_cos_Click(System::Object^ sender, System::EventArgs^ e) {
+    if (!this->second_mode) {
+        this->result = cos(Convert::ToDouble(this->NewOutputLabel->Text) * 3.141592653589793 / 180.00);
+    }
+    else {
+        this->result = acos(Convert::ToDouble(this->NewOutputLabel->Text)) * 180.0 / 3.141592653589793;
+    }
+    this->NewOutputLabel->Text = this->result.ToString();
+    btn_equal->Focus();
+    this->scientific_mode = true;
+}
+
+inline System::Void ScientificCalculator::MyForm::btn_tg_Click(System::Object^ sender, System::EventArgs^ e) {
+    if (!this->second_mode) {
+        this->result = tan(Convert::ToDouble(this->NewOutputLabel->Text) * 3.141592653589793 / 180.00);
+    }
+    else {
+        this->result = atan(Convert::ToDouble(this->NewOutputLabel->Text)) * 180.00 / 3.141592653589793;
+    }
+    this->NewOutputLabel->Text = this->result.ToString();
+    btn_equal->Focus();
+    this->scientific_mode = true;
+}
+
+inline System::Void ScientificCalculator::MyForm::btn_ctg_Click(System::Object^ sender, System::EventArgs^ e) {
+    if (!this->second_mode) {
+        this->result = 1.00/tan(Convert::ToDouble(this->NewOutputLabel->Text) * 3.141592653589793 / 180.00)/sin(Convert::ToDouble(this->NewOutputLabel->Text) * 3.141592653589793 / 180.00);
+    }
+    else {
+        this->result = atan(1.00/Convert::ToDouble(this->NewOutputLabel->Text)) * 180.00 / 3.141592653589793;
+    }
+    this->NewOutputLabel->Text = this->result.ToString();
+    btn_equal->Focus();
+    this->scientific_mode = true;
+}
+
 inline System::Void ScientificCalculator::MyForm::btn_pi_Click(System::Object^ sender, System::EventArgs^ e) {
     double pi = 3.141592653589793;
     this->NewOutputLabel->Text = pi.ToString();
@@ -581,6 +629,10 @@ inline System::Void ScientificCalculator::MyForm::btn_2nd_Click(System::Object^ 
         this->btn_xy->Text = "X^(y)";
         this->btn_sqrt->Text = "sqrtx";
         this->btn_xsquare->Text = "x²";
+        this->btn_sin->Text = "sin";
+        this->btn_cos->Text = "cos";
+        this->btn_tg->Text = "tg";
+        this->btn_ctg->Text = "ctg";
     }
     else {
         this->btn_2nd->BackColor = System::Drawing::Color::LightSkyBlue;        
@@ -591,5 +643,9 @@ inline System::Void ScientificCalculator::MyForm::btn_2nd_Click(System::Object^ 
         this->btn_xy->Text = "x^(1/y)";
         this->btn_sqrt->Text = "cbrtx";
         this->btn_xsquare->Text = "x³";
+        this->btn_sin->Text = "arcsin";
+        this->btn_cos->Text = "arccos";
+        this->btn_tg->Text = "arctg";
+        this->btn_ctg->Text = "arcctg";
     }
 }
