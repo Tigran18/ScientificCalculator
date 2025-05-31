@@ -15,12 +15,9 @@ namespace ScientificCalculator {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm(void)
-		{
+		MyForm(void) {
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			this->KeyPreview = true; // Ensure form receives key events first
 		}
 
 	protected:
@@ -85,15 +82,6 @@ namespace ScientificCalculator {
 	private: System::Windows::Forms::Button^ btn_cos;
 	private: System::Windows::Forms::Button^ btn_tg;
 	private: System::Windows::Forms::Button^ btn_ctg;
-
-
-
-
-
-
-
-
-
 
 	protected:
 
@@ -552,7 +540,6 @@ namespace ScientificCalculator {
 		bool brackets = false;
 		bool second_mode = false;
 	private:
-
 		System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
 		System::Void button0_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
@@ -576,9 +563,7 @@ namespace ScientificCalculator {
 		System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 		System::Void MyForm_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 		System::Void btn_Clear_Click(System::Object^ sender, System::EventArgs^ e);
-
 		System::Void btn_exp_Click(System::Object^ sender, System::EventArgs^ e);
-	
 		System::Void btn_factorial_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btn_mod_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btn_inverse_Click(System::Object^ sender, System::EventArgs^ e);

@@ -1,12 +1,9 @@
 ﻿#pragma once
+#include <string>
+#include "tree.hpp"
 #include <math.h>
 
-bool isdigit(char c);
-
 double factorial(double n);
-
-void CalculateTheBrackets(char* expression, int length, char* result);
-
-double EvaluateExpression(char* expression, int length);
-
-double Log(double base, double num);;
+double Log(double base, double num);
+void CalculateTheBrackets(char* text, int length, char* result);
+double EvaluateWithExpressionTree(const std::string& expr);
